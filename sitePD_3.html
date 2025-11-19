@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Product Designer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d2d5f 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body.locked {
+            filter: blur(10px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+ .password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+        .password-overlay.hidden {
+            display: none;
+        }
+
+        .password-box {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.95) 0%, rgba(45, 45, 95, 0.95) 100%);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .password-box h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .password-box input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .password-box input:focus {
+            outline: none;
+            border-color: #a855f7;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .password-box button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .password-box button:hover {
+            transform: translateY(-2px);
+        }
+
+        .password-error {
+            color: #ef4444;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .hero .tagline {
+            font-size: 1rem;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 40px 20px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .case-study {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 40px 30px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .case-study::after {
+            content: 'Click to explore';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(168, 85, 247, 0.8);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .case-study::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #a855f7, #06b6d4, #10b981);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .case-study:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .case-study:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .case-study:hover::before {
+            transform: scaleX(1);
+        }
+
+        .case-study h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .case-study p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .case-study .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(99, 102, 241, 0.2);
+            color: #c7d2fe;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.95) 0%, rgba(45, 45, 95, 0.95) 100%);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .video-placeholder span {
+            color: #64748b;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .image-gallery {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-container {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .gallery-slide img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-placeholder {
+            width: 80%;
+            height: 80%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 1rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #1e293b;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-nav.prev {
+            left: 15px;
+        }
+
+        .gallery-nav.next {
+            right: 15px;
+        }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-dot.active {
+            background: rgba(168, 85, 247, 0.8);
+            transform: scale(1.2);
+        }
+
+        .modal h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .modal-description {
+            color: #94a3b8;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .modal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-circle:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-circle:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .case-study {
+                padding: 30px 20px;
+            }
+
+            .case-study::after {
+                position: static;
+                display: block;
+                margin: 20px 0 0 0;
+                text-align: center;
+                opacity: 1;
+                transform: none;
+                background: rgba(168, 85, 247, 0.6);
+                border-radius: 12px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
+                z-index: auto;
+            }
+            
+            .modal-content {
+                margin: 10px;
+                padding: 30px 20px;
+            }
+
+            .video-placeholder {
+                height: 200px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="locked">
+    <div class="password-overlay" id="passwordOverlay">
+        <div class="password-box">
+            <h2>Protected Portfolio</h2>
+            <p style="color: #94a3b8; margin-bottom: 20px;">Enter password to view</p>
+            <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="off">
+            <button onclick="checkPassword()">Unlock</button>
+            <div class="password-error" id="passwordError">Incorrect password. Please try again.</div>
+        </div>
+    </div>
+
+    <div class="floating-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Product Designer</h1>
+            <p>Crafting Digital Experiences That Matter</p>
+            <p class="tagline">Five years of transforming complex problems into elegant solutions</p>
+        </div>
+    </header>
+
+    <main class="portfolio-grid">
+        <div class="case-study" data-modal="modal1">
+            <h3>E-commerce Platform Redesign</h3>
+            <p>Complete overhaul of a B2B marketplace, improving user engagement by 340% and reducing checkout abandonment by 60%.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">User Research</span>
+                <span class="tech-tag">Prototyping</span>
+                <span class="tech-tag">A/B Testing</span>
+            </div>
+        </div>
+
+        <div class="case-study" data-modal="modal2">
+            <h3>Healthcare Mobile App</h3>
+            <p>Patient-centered design for a telemedicine platform serving 50K+ users, streamlining appointment booking and medical consultations.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Mobile Design</span>
+                <span class="tech-tag">Accessibility</span>
+                <span class="tech-tag">Design System</span>
+            </div>
+        </div>
+
+        <div class="case-study" data-modal="modal3">
+            <h3>SaaS Dashboard Evolution</h3>
+            <p>Transformed complex analytics into intuitive insights, increasing daily active users by 200% and customer satisfaction scores by 45%.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Data Visualization</span>
+                <span class="tech-tag">UX Strategy</span>
+                <span class="tech-tag">Enterprise UX</span>
+            </div>
+        </div>
+
+        <div class="case-study" data-modal="modal4">
+            <h3>FinTech Innovation Project</h3>
+            <p>Ground-up design of a cryptocurrency trading platform, balancing complex functionality with regulatory compliance and user trust.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Financial UX</span>
+                <span class="tech-tag">Compliance Design</span>
+                <span class="tech-tag">User Testing</span>
+            </div>
+        </div>
+
+        <div class="case-study" data-modal="modal6">
+            <h3>Enterprise Design System</h3>
+            <p>Built a comprehensive design system from scratch for a Fortune 500 company, reducing design-to-development time by 70% across 15+ product teams.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Design Systems</span>
+                <span class="tech-tag">Component Library</span>
+                <span class="tech-tag">Design Tokens</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div class="modal" id="modal1">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="video-placeholder">
+                <span>Add your case study video here</span>
+            </div>
+            <h3>E-commerce Platform Redesign</h3>
+            <p class="modal-description">
+                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
+            </p>
+            <a href="#" class="modal-link">
+                View Full Case Study →
+            </a>
+        </div>
+    </div>
+
+    <div class="modal" id="modal2">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="image-gallery">
+                <div class="gallery-container" id="gallery-container">
+                    <div class="gallery-slide">
+                        <div class="gallery-placeholder">
+                            Add your first XD export image here<br>
+                            <small style="margin-top: 10px; opacity: 0.7;">Replace this placeholder with your design board</small>
+                        </div>
+                    </div>
+                    <div class="gallery-slide">
+                        <div class="gallery-placeholder">
+                            Add your second XD export image here<br>
+                            <small style="margin-top: 10px; opacity: 0.7;">User flow or wireframes</small>
+                        </div>
+                    </div>
+                    <div class="gallery-slide">
+                        <div class="gallery-placeholder">
+                            Add your third XD export image here<br>
+                            <small style="margin-top: 10px; opacity: 0.7;">Final designs or prototypes</small>
+                        </div>
+                    </div>
+                    <div class="gallery-slide">
+                        <div class="gallery-placeholder">
+                            Add your fourth XD export image here<br>
+                            <small style="margin-top: 10px; opacity: 0.7;">User testing or results</small>
+                        </div>
+                    </div>
+                </div>
+                <button class="gallery-nav prev" onclick="changeSlide(-1)">‹</button>
+                <button class="gallery-nav next" onclick="changeSlide(1)">›</button>
+                <div class="gallery-dots">
+                    <div class="gallery-dot active" onclick="currentSlide(1)"></div>
+                    <div class="gallery-dot" onclick="currentSlide(2)"></div>
+                    <div class="gallery-dot" onclick="currentSlide(3)"></div>
+                    <div class="gallery-dot" onclick="currentSlide(4)"></div>
+                </div>
+            </div>
+            <h3>Healthcare Mobile App</h3>
+            <p class="modal-description">
+                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
+            </p>
+            <a href="#" class="modal-link">
+                View Full Case Study →
+            </a>
+        </div>
+    </div>
+
+    <div class="modal" id="modal3">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="video-placeholder">
+                <span>Add your case study video here</span>
+            </div>
+            <h3>SaaS Dashboard Evolution</h3>
+            <p class="modal-description">
+                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
+            </p>
+            <a href="#" class="modal-link">
+                View Full Case Study →
+            </a>
+        </div>
+    </div>
+
+    <div class="modal" id="modal4">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="video-placeholder">
+                <span>Add your case study video here</span>
+            </div>
+            <h3>FinTech Innovation Project</h3>
+            <p class="modal-description">
+                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
+            </p>
+            <a href="#" class="modal-link">
+                View Full Case Study →
+            </a>
+        </div>
+    </div>
+
+    <div class="modal" id="modal5">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="video-placeholder">
+                <span>Add your case study video here</span>
+            </div>
+            <h3>AI-Powered Content Platform</h3>
+            <p class="modal-description">
+                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
+            </p>
+            <a href="#" class="modal-link">
+                View Full Case Study →
+            </a>
+        </div>
+    </div>
+
+    <div class="modal" id="modal6">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="video-placeholder">
+                <span>Add your case study video here</span>
+            </div>
+            <h3>Enterprise Design System</h3>
+            <p class="modal-description">
+                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
+            </p>
+            <a href="#" class="modal-link">
+                View Full Case Study →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Password protection
+        function checkPassword() {
+            const input = document.getElementById('passwordInput');
+            const overlay = document.getElementById('passwordOverlay');
+            const error = document.getElementById('passwordError');
+            const body = document.body;
+
+            if (input.value === 'Product1!') {
+                overlay.classList.add('hidden');
+                body.classList.remove('locked');
+                sessionStorage.setItem('portfolioUnlocked', 'true');
+            } else {
+                error.classList.add('show');
+                input.value = '';
+                input.focus();
+                setTimeout(() => {
+                    error.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Check if already unlocked in this session
+        window.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('portfolioUnlocked') === 'true') {
+                document.getElementById('passwordOverlay').classList.add('hidden');
+                document.body.classList.remove('locked');
+            }
+        });
+
+        // Gallery functionality
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.gallery-slide');
+        const dots = document.querySelectorAll('.gallery-dot');
+        const container = document.getElementById('gallery-container');
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            if (currentSlideIndex >= slides.length) {
+                currentSlideIndex = 0;
+            }
+            if (currentSlideIndex < 0) {
+                currentSlideIndex = slides.length - 1;
+            }
+            updateGallery();
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            updateGallery();
+        }
+
+        function updateGallery() {
+            if (container) {
+                container.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideIndex);
+            });
+        }
+
+        // Modal functionality
+        const caseStudies = document.querySelectorAll('.case-study');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.modal-close');
+
+        caseStudies.forEach(study => {
+            study.addEventListener('click', () => {
+                const modalId = study.getAttribute('data-modal');
+                const modal = document.getElementById(modalId);
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.closest('.modal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Escape key to close modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modals.forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
