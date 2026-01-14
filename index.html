@@ -1674,6 +1674,7 @@ document.addEventListener('DOMContentLoaded', function () {
       modal.classList.remove('active');
       stopVideos(modal);
       document.body.style.overflow = '';
+		history.replaceState(null, '', window.location.pathname);
     });
   });
 
@@ -1684,6 +1685,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.classList.remove('active');
         stopVideos(modal);
         document.body.style.overflow = '';
+		  history.replaceState(null, '', window.location.pathname);
       }
     });
   });
@@ -1696,8 +1698,29 @@ document.addEventListener('DOMContentLoaded', function () {
         stopVideos(modal);
       });
       document.body.style.overflow = '';
+		history.replaceState(null, '', window.location.pathname);
     }
   });
+});
+document.addEventListener('DOMContentLoaded', function () {
+  const params = new URLSearchParams(window.location.search);
+  const caseParam = params.get('case');
+
+  if (!caseParam) return;
+
+  const caseToModalMap = {
+    ntrack: 'modal-suite',
+    crt: 'modal2',
+    songtree: 'modal3'
+  };
+
+  const modalId = caseToModalMap[caseParam.toLowerCase()];
+  const modal = modalId ? document.getElementById(modalId) : null;
+
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 });
 </script>
 </body>
