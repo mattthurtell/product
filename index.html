@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+  <!-- Referrer privacy -->
   <meta name="referrer" content="no-referrer">
   <title>Matt - Senior Product Manager</title>
   <style>
@@ -191,7 +192,7 @@
       margin-top: 10px;
       border-radius: 18px;
       overflow: hidden;
-      background: #020617 url('/Users/mattthurtell/Documents/pd/mattthurtell.jpg') center center / cover no-repeat;
+      background: #020617 url('/img/matt.jpg') center center / cover no-repeat;
       height: 220px;
       position: relative;
       transform: translateY(0) scale(1);
@@ -1420,7 +1421,7 @@ Used community feedback and hands-on testing to identify common friction points 
     <button class="modal-close">&times;</button>
     <div class="video-container">
       <iframe
-        src="https://www.youtube-nocookie.com/embed/ZDWevID1ZXU"
+        src="https://www.youtube-nocookie.com/embed/ZDWevID1ZXU?modestbranding=1&rel=0&cc_load_policy=1"
         title="Intro video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -1447,7 +1448,7 @@ Used community feedback and hands-on testing to identify common friction points 
 </p>
     <div class="video-container">
       <iframe
-        src="https://www.youtube-nocookie.com/embed/DmzKgoug5a4"
+        src="https://www.youtube-nocookie.com/embed/DmzKgoug5a4?modestbranding=1&rel=0&cc_load_policy=1"
         title="AI-Powered Music Suite & Onboarding"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -1603,7 +1604,7 @@ Membership proposition and digital join/renew journeys rebuilt to align supporte
     <div class="video-container-embed">
       <!-- Replace the src with your real Love My Stretch YouTube embed URL -->
       <iframe
-        src="https://www.youtube.com/embed/5yNbMCQWPS4?si=EEkVoUAFwVbzhNoK"
+        src="https://youtube-nocookie.com/5yNbMCQWPS4?si=9Aw8MGVLxl6KxIF7?modestbranding=1&rel=0&cc_load_policy=1"
         title="Love My Stretch overview"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1619,7 +1620,7 @@ Membership proposition and digital join/renew journeys rebuilt to align supporte
     <button class="modal-close">&times;</button>
     <div class="video-container-embed">
       <iframe
-        src="https://www.youtube-nocookie.com/embed/i53O2VU9qb4?si=fzPjvYP87EsU5Sut"
+        src="https://www.youtube-nocookie.com/embed/i53O2VU9qb4?si=fzPjvYP87EsU5Sut?modestbranding=1&rel=0&cc_load_policy=1"
         title="Songtree & YouTube community overview"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -1630,12 +1631,23 @@ Membership proposition and digital join/renew journeys rebuilt to align supporte
 </div>
 
 <script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
   const caseStudies = document.querySelectorAll('.case-study');
   const modals = document.querySelectorAll('.modal');
   const closeButtons = document.querySelectorAll('.modal-close');
+  const innerModalButtons = document.querySelectorAll('[data-modal-target]');
 
-  // Open modal when clicking any .case-study (incl. intro + AI suite)
+  function stopVideos(modal) {
+    const iframes = modal.querySelectorAll('iframe');
+    iframes.forEach(iframe => {
+      const src = iframe.src;
+      iframe.src = '';
+      iframe.src = src;
+    });
+  }
+
+  // Open modal when clicking any .case-study
   caseStudies.forEach(study => {
     study.addEventListener('click', () => {
       const modalId = study.getAttribute('data-modal');
@@ -1646,34 +1658,37 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-// Buttons inside a modal that open another modal (Love My Stretch)
-const innerModalButtons = document.querySelectorAll('[data-modal-target]');
 
-innerModalButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const targetId = btn.getAttribute('data-modal-target');
-    const targetModal = document.getElementById(targetId);
-    if (targetModal) {
-      targetModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-  });
-});
-  // Close when clicking the X
-  closeButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      button.closest('.modal').classList.remove('active');
-      document.body.style.overflow = 'auto';
+  // Open nested modals (e.g. Love My Stretch)
+  innerModalButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetId = btn.getAttribute('data-modal-target');
+      const targetModal = document.getElementById(targetId);
+      if (targetModal) {
+        targetModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
     });
   });
 
-  // Close when clicking outside the modal content
+  // Close when clicking the X
+  closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = button.closest('.modal');
+      modal.classList.remove('active');
+      stopVideos(modal);
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Close when clicking outside modal content
   modals.forEach(modal => {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
+        stopVideos(modal);
+        document.body.style.overflow = '';
       }
     });
   });
@@ -1681,11 +1696,15 @@ innerModalButtons.forEach(btn => {
   // Close all modals on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      modals.forEach(modal => modal.classList.remove('active'));
-      document.body.style.overflow = 'auto';
+      modals.forEach(modal => {
+        modal.classList.remove('active');
+        stopVideos(modal);
+      });
+      document.body.style.overflow = '';
     }
   });
 });
+</script>
 </script>
 </body>
 </html>
