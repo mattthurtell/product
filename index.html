@@ -1,877 +1,1691 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Product Designer Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <title>Matt - Senior Product Manager</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d2d5f 100%);
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d2d5f 100%);
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
 
-        body.locked {
-            filter: blur(10px);
-            pointer-events: none;
-            user-select: none;
-        }
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .top-bar h1 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .pill-link {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #e2e8f0;
+      background: rgba(15,23,42,0.5);
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease, transform .1s ease;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    .pill-link:hover {
+      background: rgba(148, 163, 184, 0.12);
+      border-color: rgba(148, 163, 184, 0.8);
+      transform: translateY(-1px);
+    }
 
- .password-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.8fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+    }
+    .hero-title {
+      font-size: 2.7rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+	  margin-top: 18px;
+    }
+    .hero-tagline {
+      font-size: 0.98rem;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      max-width: 540px;
+    }
+    .hero-meta {
+      font-size: 0.95rem;
+      color: #64748b;
+      max-width: 520px;
+    }
+    .hero-meta strong { color: #e2e8f0; }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .primary-btn,
+    .secondary-btn {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: background .2s ease, transform .1s ease, border-color .2s ease, box-shadow .2s ease;
+      margin-top: 15px;
+    }
+    .primary-btn {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: white;
+      border-color: rgba(129, 140, 248, 0.8);
+      box-shadow: 0 10px 25px rgba(15,23,42,0.7);
+    }
+    .primary-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: linear-gradient(135deg, #4f46e5, #9333ea);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+    }
+    .secondary-btn {
+      background: rgba(15,23,42,0.7);
+      color: #e2e8f0;
+      border-color: rgba(148, 163, 184, 0.5);
+    }
+    .secondary-btn:hover {
+      background: rgba(148, 163, 184, 0.12);
+      transform: translateY(-1px);
+    }
+
+    /* Intro video card – upgraded styling + hover */
+    .hero-video {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: radial-gradient(circle at top left, rgba(88,28,135,0.4), rgba(15,23,42,0.95));
+      padding: 20px 22px 22px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 15px 35px rgba(15,23,42,0.7);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease;
+    }
+    .hero-video::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #a855f7, #06b6d4, #10b981);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+      opacity: 0.9;
+    }
+    .hero-video:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 55px rgba(15,23,42,0.9);
+      border-color: rgba(129,140,248,0.9);
+    }
+    .hero-video:hover::before {
+      transform: scaleX(1);
+    }
+    .hero-video h3 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: #a5b4fc;
+      margin-bottom: 10px;
+    }
+    .hero-video p {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    .video-image {
+      margin-top: 10px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #020617 url('/Users/mattthurtell/Documents/pd/mattthurtell.jpg') center center / cover no-repeat;
+      height: 220px;
+      position: relative;
+      transform: translateY(0) scale(1);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.7);
+    }
+    .video-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(15,23,42,0) 40%, rgba(15,23,42,0.45) 100%);
+    }
+    .hero-video:hover .video-image {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 20px 45px rgba(15,23,42,0.9);
+    }
+
+    /* Sections */
+
+    .section {
+      margin-top: 40px;
+    }
+    .section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+      color: #e5e7eb;
+    }
+    .section-intro {
+      font-size: 0.96rem;
+      color: #94a3b8;
+      max-width: 680px;
+      margin-bottom: 16px;
+    }
+
+    /* Case studies – upgraded to match older style */
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .case-study {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 24px 20px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    /* animated top border + "Click to explore" tag */
+    .case-study::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #a855f7, #06b6d4, #10b981);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .case-study::after {
+      content: 'View case study';
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: rgba(168, 85, 247, 0.8);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .case-study:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(129, 140, 248, 0.7);
+    }
+    .case-study:hover::before {
+      transform: scaleX(1);
+    }
+    .case-study:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .case-study h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: white;
+    }
+    .case-study p {
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+    .case-study ul {
+      list-style: none;
+      margin-bottom: 10px;
+    }
+    .case-study li {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .tech-pill {
+      background: rgba(129, 140, 248, 0.15);
+      color: #c7d2fe;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+    .case-link {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 0.85rem;
+      color: #a5b4fc;
+      text-decoration: underline;
+    }
+
+    /* Highlights */
+
+    .highlights {
+      margin-top: 32px;
+    }
+    .highlights h2 {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: #a855f7;
+      text-align: left;
+    }
+    .highlights ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 8px;
+    }
+    .highlights li {
+      margin-bottom: 10px;
+      line-height: 1.55;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .highlights-strip {
+      margin-top: 40px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.4);
+    }
+    .highlights-strip h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: #a855f7;
+    }
+    .highlight-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .highlight-item {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .mini-about {
+      margin-top: 40px;
+    }
+    .mini-about p {
+      font-size: 0.96rem;
+      color: #cbd5e1;
+      max-width: 720px;
+      margin-bottom: 8px;
+    }
+    .mini-about a {
+      font-size: 0.9rem;
+      color: #a5b4fc;
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(148,163,184,0.35);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+   .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: auto;
+}
+    .footer a {
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      text-decoration: underline;
+    }
+
+    /* Modals – restyled to match older version */
+
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal.active {
+      display: flex;
+      animation: modalFadeIn 0.3s ease;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, rgba(30,30,60,0.95) 0%, rgba(45,45,95,0.95) 100%);
+      border-radius: 24px;
+      padding: 32px 26px 26px;
+      max-width: 820px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    }
+    .modal-content h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+    .modal-description {
+      font-size: 0.94rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    .modal-description strong { color: #e5e7eb; }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .modal-close:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .visual-placeholder {
+      width: 100%;
+      height: 210px;
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      border-radius: 16px;
+      border: 2px dashed rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .case-study {
+        padding: 20px 16px;
+      }
+      .case-study::after {
+        position: static;
+        display: block;
+        margin: 18px 0 0;
+        text-align: center;
+        opacity: 1;
+        transform: none;
+        background: rgba(168, 85, 247, 0.6);
+        border-radius: 12px;
+      }
+      .modal-content {
+        margin: 10px;
+        padding: 28px 20px;
+      }
+    }
+.case-visual {
+  width: 100%;
+  border-radius: 18px;
+  padding: 14px 16px 12px;
+  background: radial-gradient(circle at top left, rgba(56,189,248,0.14), rgba(15,23,42,0.96));
+  border: 1px solid rgba(148,163,184,0.45);
+  box-shadow: 0 20px 45px rgba(15,23,42,0.8);
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-        .password-overlay.hidden {
-            display: none;
-        }
+.case-visual-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
 
-        .password-box {
-            background: linear-gradient(135deg, rgba(30, 30, 60, 0.95) 0%, rgba(45, 45, 95, 0.95) 100%);
-            padding: 40px;
-            border-radius: 24px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 400px;
-            width: 90%;
-        }
+.case-visual-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #e5e7eb;
+  opacity: 0.9;
+}
 
-        .password-box h2 {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+.case-visual-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34,197,94,0.8);
+}
 
-        .password-box input {
-            width: 100%;
-            padding: 15px;
-            font-size: 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
+.case-visual-label {
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: #cbd5e1;
+}
 
-        .password-box input:focus {
-            outline: none;
-            border-color: #a855f7;
-            background: rgba(255, 255, 255, 0.08);
-        }
+.case-visual-metric {
+  font-size: 0.8rem;
+  color: #a5b4fc;
+  background: rgba(15,23,42,0.85);
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(129,140,248,0.6);
+}
 
-        .password-box button {
-            width: 100%;
-            padding: 15px;
-            font-size: 1rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+.case-visual-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+}
 
-        .password-box button:hover {
-            transform: translateY(-2px);
-        }
+@media (max-width: 640px) {
+  .case-visual-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 
-        .password-error {
-            color: #ef4444;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            display: none;
-        }
+.case-visual-thumbnail {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 170px;
+  background: #020617 url('/Users/mattthurtell/Documents/pd/crt1_better.jp') center center / cover no-repeat;
+}
 
-        .password-error.show {
-            display: block;
-        }
+.case-visual-thumbnail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15,23,42,0.7), rgba(15,23,42,0.0));
+}
 
-        .hero {
-            text-align: center;
-            padding: 80px 20px 60px;
-            position: relative;
-        }
+/* ========== Overrides so .hero-video keeps its own look but still uses case-study behaviour ========== */
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(40px);
-            z-index: 0;
-        }
+/* Hide the "View case study" pill for hero-video when it also has .case-study */
+.hero-video.case-study::after {
+  display: none !important;
+}
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
+/* Prevent the generic .case-study hover transform/glow from overriding hero-video.
+   Re-assert the hero-video hover behaviour (keeps the top gradient line + -6px transform you defined). */
+.hero-video.case-study {
+  /* keep pointer cursor to show clickability */
+  cursor: pointer;
+  /* preserve hero style if .case-study rules had changed background/border */
+  background: radial-gradient(circle at top left, rgba(88,28,135,0.4), rgba(15,23,42,0.95));
+  border: 1px solid rgba(255,255,255,0.13);
+  box-shadow: 0 15px 35px rgba(15,23,42,0.7);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.35s ease;
+}
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.1;
-        }
+/* Make the hero-video hover use the hero-specific transform, not the generic case-study one */
+.hero-video.case-study:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 22px 55px rgba(15,23,42,0.9) !important;
+  border-color: rgba(129,140,248,0.9) !important;
+}
 
-        .hero p {
-            font-size: 1.3rem;
-            color: #94a3b8;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
+/* Keep hero-video's top gradient animation active on hover */
+.hero-video.case-study:hover::before {
+  transform: scaleX(1) !important;
+}
 
-        .hero .tagline {
-            font-size: 1rem;
-            color: #64748b;
-            font-style: italic;
-        }
+/* Ensure the internal video-image hover effect still works when used as case-study */
+.hero-video.case-study .video-image {
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.hero-video.case-study:hover .video-image {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 20px 45px rgba(15,23,42,0.9);
+  border-color: rgba(129,140,248,0.9);
+}
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            padding: 40px 20px 80px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+/* Make sure the .case-study::before (the thin top bar) doesn't visually conflict with the hero top bar.
+   If you want the hero top bar to match, keep this; otherwise remove it. */
+.hero-video.case-study::before {
+  height: 3px; /* hero uses 3px in your rules */
+  opacity: 0.9;
+}
 
-        .case-study {
-            position: relative;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 40px 30px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-        }
+/* Prevent pointer-events or child elements from blocking the click — ensure whole block is clickable */
+.hero-video.case-study .video-image-button,
+.hero-video.case-study .video-image,
+.hero-video.case-study .video-play-pill {
+  cursor: pointer;
+}
 
-        .case-study::after {
-            content: 'Click to explore';
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(168, 85, 247, 0.8);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            z-index: 10;
-        }
+/* If your hero-video had no border change on non-hover, re-assert that too */
+.hero-video.case-study:not(:hover) {
+  border-color: rgba(255,255,255,0.13) !important;
+}
 
-        .case-study::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #a855f7, #06b6d4, #10b981);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-            transform-origin: left;
-        }
+.play-badge {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .case-study:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.08);
-        }
+.play-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  border: 2px solid rgba(248,250,252,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  background: radial-gradient(circle at top left, rgba(248,250,252,0.18), rgba(15,23,42,0.9));
+  box-shadow: 0 16px 32px rgba(15,23,42,0.9);
+}
 
-        .case-study:hover::after {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.case-visual-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
 
-        .case-study:hover::before {
-            transform: scaleX(1);
-        }
+.case-visual-bar {
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(129,140,248,0.3), rgba(236,72,153,0.4));
+}
 
-        .case-study h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: white;
-        }
+.case-visual-bar--short {
+  width: 60%;
+}
 
-        .case-study p {
-            color: #94a3b8;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
+.case-visual-comment {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #cbd5e1;
+  background: rgba(15,23,42,0.9);
+  border-radius: 10px;
+  padding: 8px 9px;
+  border: 1px solid rgba(148,163,184,0.35);
+}
 
-        .case-study .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 20px;
-        }
+.case-visual-caption {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  opacity: 0.95;
+}
+.case-visual--membership {
+  background: radial-gradient(circle at top left, rgba(52,211,153,0.16), rgba(15,23,42,0.97));
+}
 
-        .tech-tag {
-            background: rgba(99, 102, 241, 0.2);
-            color: #c7d2fe;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
+.case-visual-thumbnail--membership {
+  background: #020617 url('/Users/mattthurtell/Documents/pd/018972e4-de2b-797c-8386-aff1d94f808b (1).png') center center / cover no-repeat;
+}
 
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
+.case-visual--community {
+  background: radial-gradient(circle at top left, rgba(56,189,248,0.16), rgba(15,23,42,0.97));
+}
+.case-visual--suite {
+  background: radial-gradient(circle at top left, rgba(129,140,248,0.18), rgba(15,23,42,0.97));
+}
 
-        .modal.active {
-            display: flex;
-            animation: modalFadeIn 0.3s ease;
-        }
+.case-visual-thumbnail--suite {
+  background: #020617 url('/Users/mattthurtell/Documents/pd/crt1_better.jpg') center center / cover no-repeat;
+}
 
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+.case-visual-side-metric {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: #e5e7eb;
+  margin-bottom: 4px;
+}
 
-        .modal-content {
-            background: linear-gradient(135deg, rgba(30, 30, 60, 0.95) 0%, rgba(45, 45, 95, 0.95) 100%);
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-        }
+.case-visual-side-label {
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: 0.7rem;
+  color: #a5b4fc;
+  opacity: 0.9;
+}
 
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
+.case-visual-side-value {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
 
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
+.case-video {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
 
-        .video-placeholder {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-        }
+.case-video-inner {
+  width: 90%;
+  border-radius: 18px;
+  padding: 10px 10px 12px;
+  background: radial-gradient(circle at top left, rgba(56,189,248,0.18), rgba(15,23,42,0.98));
+  border: 1px solid rgba(148,163,184,0.5);
+  position: relative;
+  overflow: hidden;
+}
 
-        .video-placeholder span {
-            color: #64748b;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
+.case-video-image {
+  border-radius: 12px;
+  background: #020617 url('/Users/mattthurtell/Documents/pd/4. ProduceLikeaPro - MOCKUP.png') center center / cover no-repeat;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+}
 
-        .image-gallery {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 16px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
+.case-video-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(15,23,42,0) 30%, rgba(15,23,42,0.55) 100%);
+  pointer-events: none;
+}
 
-        .gallery-container {
-            display: flex;
-            height: 100%;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+.case-video-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .gallery-slide {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+.case-video-play-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 2px solid rgba(248,250,252,0.9);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  backdrop-filter: blur(8px);
+  background: rgba(15,23,42,0.5);
+  box-shadow: 0 10px 25px rgba(15,23,42,0.9);
+}
+.case-suite-stats {
+  /*display: flex;
+  flex-wrap: wrap;*/
+  gap: 8px;
+  margin-top: 12px;
+}
 
-        .gallery-slide img {
-            max-width: 95%;
-            max-height: 95%;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
+.case-suite-stat {
+  flex: 1 1 90px;
+  min-width: 90px;
+  padding: 9px 10px;
+  border-radius: 12px;
+  /*background: rgba(15,23,42,0.9);*/
+  border: 1px solid rgba(148,163,184,0.45);
+  margin-top: 9px;
+}
 
-        .gallery-placeholder {
-            width: 80%;
-            height: 80%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #64748b;
-            font-size: 1rem;
-            text-align: center;
-            padding: 20px;
-        }
+.case-suite-stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
 
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #1e293b;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
+.case-suite-stat-value {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
 
-        .gallery-nav:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: translateY(-50%) scale(1.1);
-        }
+.case-suite-stat-sub {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
 
-        .gallery-nav.prev {
-            left: 15px;
-        }
+/* Footer under stats */
+.case-suite-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 0.82rem;
+  color: #9ca3af;
+  margin-top: 10px;
+}
 
-        .gallery-nav.next {
-            right: 15px;
-        }
+.case-suite-cta {
+  font-weight: 500;
+  color: #c7d2fe;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
 
-        .gallery-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
+.case-suite-cta::after {
+  content: '↗';
+  font-size: 0.85em;
+  opacity: 0.9;
+}
 
-        .gallery-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.case-suite-hint {
+  opacity: 0.8;
+}
+.case-points {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-        .gallery-dot.active {
-            background: rgba(168, 85, 247, 0.8);
-            transform: scale(1.2);
-        }
+.case-point {
+  border-radius: 16px;
+  /*background: rgba(15,23,42,0.9);*/
+  border: 1px solid rgba(148,163,184,0.45);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+.case-media {
+  margin-top: 14px;
+  margin-bottom: 10px;
+}
 
-        .modal h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: white;
-        }
+.case-media-placeholder {
+  width: 100%;
+  height: 150px;
+  border-radius: 16px;
+  background: rgba(15,23,42,0.9);
+  border: 1px dashed rgba(148,163,184,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: center;
+  padding: 0 12px;
+}
 
-        .modal-description {
-            color: #94a3b8;
-            line-height: 1.7;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-        }
+.case-media-img {
+  width: 100%;
+  border-radius: 16px;
+  display: block;
+  border: 1px solid rgba(148,163,184,0.45);
+}
 
-        .modal-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #a855f7 0%, #06b6d4 100%);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease;
-        }
+.video-image-button {
+  margin-top: 10px;
+  padding: 0;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 18px;
+  display: block;
+}
 
-        .modal-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
-        }
+.video-image {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #020617 url('/Users/mattthurtell/Documents/pd/mattthurtell.jpg') center center / cover no-repeat;
+  height: 220px;
+  position: relative;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  border: 1px solid rgba(148,163,184,0.4);
+}
 
-        .floating-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
+.video-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(15,23,42,0.0) 40%, rgba(15,23,42,0.5) 100%);
+}
 
-        .floating-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
-        }
+.video-image-button:hover .video-image {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.7);
+  border-color: rgba(129,140,248,0.9);
+}
 
-        .floating-circle:nth-child(1) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
+.video-play-pill {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 14px 26px;
+  border-radius: 19px;
+  background: rgba(15,23,42,0.92);
+  border: 1px solid rgba(148,163,184,0.6);
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 10px 30px rgba(15,23,42,0.9);
+  backdrop-filter: blur(10px);
+}
 
-        .floating-circle:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            top: 60%;
-            right: 15%;
-            animation-delay: 2s;
-        }
+.video-play-pill::before {
+  content: '▶';
+  font-size: 1.4rem;
+}
+/* Video Modal – styled to match site */
 
-        .floating-circle:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
+.modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top, rgba(15,23,42,0.8), rgba(2,6,23,0.96));
+  backdrop-filter: blur(14px);
+  display: none; /* toggled via JS */
+  z-index: 1200;
+}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, rgba(15,23,42,0.98), rgba(30,64,175,0.96), rgba(76,29,149,0.96));
+  padding: 18px 18px 20px;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(15,23,42,0.9);
+  width: 92%;
+  max-width: 1350px;
+  border: 1px solid rgba(148,163,184,0.45);
+}
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px;
-            }
-            
-            .case-study {
-                padding: 30px 20px;
-            }
+/* Responsive iframe container */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.8);
+}
 
-            .case-study::after {
-                position: static;
-                display: block;
-                margin: 20px 0 0 0;
-                text-align: center;
-                opacity: 1;
-                transform: none;
-                background: rgba(168, 85, 247, 0.6);
-                border-radius: 12px;
-                padding: 8px 16px;
-                font-size: 0.8rem;
-                z-index: auto;
-            }
-            
-            .modal-content {
-                margin: 10px;
-                padding: 30px 20px;
-            }
+.video-container iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
-            .video-placeholder {
-                height: 200px;
-                margin-bottom: 20px;
-            }
-        }
-    </style>
+.close-btn {
+ /* position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #e5e7eb;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15,23,42,0.85);
+  border: 1px solid rgba(148,163,184,0.6);
+  box-shadow: 0 10px 25px rgba(15,23,42,0.9);
+  transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;*/
+}
+
+.close-btn::before {
+  content: "";
+  line-height: 1;
+}
+
+.close-btn:hover {
+  background: rgba(129,140,248,0.95);
+  color: #020617;
+  transform: translateY(-1px);
+}
+
+.love-video-btn {
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.5);
+  background: rgba(15,23,42,0.9);
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease, opacity 0.15s ease;
+}
+
+.love-video-btn:hover {
+  background: rgba(148,163,184,0.16);
+  border-color: rgba(148,163,184,0.8);
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.video-container-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  margin-bottom: 14px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, rgba(88,28,135,0.35), rgba(15,23,42,0.95));
+  border: 1px solid rgba(148,163,184,0.4);
+}
+
+.video-container-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.case-visual-thumbnail--community {
+  background: #020617 url('/Users/mattthurtell/Documents/pd/songtree-screen.jpg')
+    center center / cover no-repeat;
+}
+.case-visual-thumbnail.video-thumb {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.case-visual-thumbnail.video-thumb:focus {
+  outline: 2px solid rgba(129,140,248,0.9);
+  outline-offset: 2px;
+}
+
+.award-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f5f5f5;
+  padding: 10px 16px;
+  border-radius: 12px;
+  margin-top: 20px;
+  max-width: 420px;
+}
+
+.award-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.award-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.3;
+}
+.case-study-award-tag {
+  color: #e6e7eb;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  display: inline-block;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  margin-top:8px;
+  border:.01px solid #9da3af;
+}
+  </style>
 </head>
-<body class="locked">
-    <div class="password-overlay" id="passwordOverlay">
-        <div class="password-box">
-            <h2>Protected Portfolio</h2>
-            <p style="color: #94a3b8; margin-bottom: 20px;">Enter password to view</p>
-            <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="off">
-            <button onclick="checkPassword()">Unlock</button>
-            <div class="password-error" id="passwordError">Incorrect password. Please try again.</div>
-        </div>
+<body>
+<div class="page">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <h1>Matt Thurtell - Senior Product Manager</h1>
+    <!--<div class="top-actions">
+      <a href="career-designer.html" class="pill-link">Career / What I Do</a>
+      <a href="YOUR_CV_LINK.pdf" target="_blank" rel="noopener" class="pill-link">Download CV</a>
+    </div>-->
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div>
+      <h2 class="hero-title">Currently Senior Product Manager at n-Track Studio</h2>
+   <div class="secondary-btn" style="pointer-events: none; cursor: default;">Microsoft Store Awards Winner - Best Creative App 2025 🏆</div>
+
+      <!--<div class="award-badge">
+  <img src="/images/microsoft-award.jpg" alt="Microsoft Award 2025 – Best Creative App" class="award-img">
+  <div class="award-text">
+   Microsoft Store Awards Winner - Best Creative App 2025
+  </div>
+
+
+</div>-->
+      <p class="hero-subtitle">
+        Leading product strategy, onboarding, monetisation, and growth for an AI-powered product used by <strong>5M+ creators</strong>.
+      </p>
+      <p class="hero-tagline">
+       I lead end-to-end product work, from strategy and prioritisation to experimentation and delivery, using real user behaviour and commercial metrics to guide decisions.
+      </p>
+      <p class="hero-meta">
+        Previously Product Manager at <strong>Canal &amp; River Trust</strong>, where I helped <strong>triple product income</strong> by repositioning the membership model and launching a new digital product.
+      </p>
     </div>
 
-    <div class="floating-elements">
-        <div class="floating-circle"></div>
-        <div class="floating-circle"></div>
-        <div class="floating-circle"></div>
+<div class="case-study hero-video" data-modal="modal-intro" style="background:radial-gradient(circle at top left, rgba(88,28,135,0.4), rgba(15,23,42,0.95)); padding: 18px 22px;">
+  <h3 style="color:#a5b4fc;font-size: 1rem;">Intro video</h3>
+  <p style="font-size:0.95rem;color: #cbd5e1;margin-bottom: 12px;line-height: 1.2">
+    A short overview of how I lead product strategy, prioritisation, and experimentation - and how that work delivered measurable revenue and growth outcomes at n-Track Studio and Canal &amp; River Trust.
+  </p>
+
+  <button class="video-image-button" type="button">
+    <div class="video-image">
+      <div class="video-play-pill">
+        <!--▶ Watch 90s overview-->
+      </div>
+    </div>
+  </button>
+</div>
+  </header>
+
+  <!-- Case Studies -->
+  <section class="highlights" id="case-studies">
+    <h2>Case studies</h2>
+    <p class="section-intro">
+      A selection of projects where I owned strategy, prioritisation, and delivery - driving measurable gains in revenue, conversion, and activation.
+    </p>
+
+    <div class="case-grid">
+      <!-- Case Study 1 -->
+<article class="case-study" data-modal="modal-suite">
+  <h3>AI-Powered Product Growth & Monetisation (n-Track Studio)</h3>
+<!--<div class="case-suite-stat">
+  <div class="case-suite-stat-label">Award</div>
+  <div class="case-suite-stat-value">
+    Microsoft 2025 — Best Creative App
+  </div>
+</div>-->
+
+  <div class="case-study-award-tag">
+  🏆 Winner - Microsoft Store Awards 2025
+</div>
+  <p>
+Owned product strategy for onboarding, monetisation, and subscription packaging for a music creation app with <strong>20M+</strong> downloads, including the launch of a high-value annual plan.
+  </p>
+    <div class="case-media">
+<div class="case-media-wrapper" style=" position: relative;display: inline-block;">
+  <img
+    src="/Users/mattthurtell/Documents/pd/crm1_createasong.jpg"
+    alt="Canal & River Trust membership UI"
+    class="case-media-img"
+  />
+  <div class="video-play-pill"></div>
+</div>
+
+  <div class="case-suite-stats">
+    <div class="case-suite-stat">
+      <div class="case-suite-stat-label">Revenue</div>
+      <div class="case-suite-stat-value">
+        +100% <span class="case-suite-stat-sub">in 18 months</span>
+      </div>
+    </div>
+    <div class="case-suite-stat">
+      <div class="case-suite-stat-label">Trial → Paid conversions</div>
+      <div class="case-suite-stat-value">4x +</div>
+    </div>
+    <div class="case-suite-stat">
+      <div class="case-suite-stat-label">Activation</div>
+      <div class="case-suite-stat-value">
+        3× key metrics<span class="case-suite-stat-sub"> in 3 months</span>
+      </div>
+    </div>
+  </div>
+</article>
+
+      <!-- Case Study 2 -->
+      <article class="case-study" data-modal="modal2">
+        <h3>Membership Strategy &amp; New Product Launches (Canal &amp; River Trust)</h3>
+        <p>
+          Helped reposition the membership offering and design a new digital product for a major waterway charity.
+        </p>
+      
+      <div class="case-media">
+  <img
+    src="/Users/mattthurtell/Documents/pd/crt5.jpg"
+    alt="Canal & River Trust membership UI"
+    class="case-media-img"
+  />
+  <div class="case-points">
+  <div class="case-point">
+    Led discovery and analysis across acquisition, onboarding, and renewal journeys.
+  </div>
+  <div class="case-point">
+    Defined product strategy and prioritised a roadmap spanning membership and new digital products.
+  </div>
+  <div class="case-point">
+    Contributed directly to <strong>3x product income growth</strong> in ~18 months.
+  </div>
+</div>
+      
+      <!--  <div class="pill-row">
+          <span class="tech-pill">UX Research</span>
+          <span class="tech-pill">Membership</span>
+          <span class="tech-pill">Pricing &amp; Packaging</span>
+          <span class="tech-pill">Roadmapping</span>
+        </div>-->
+      </article>
+
+      <!-- Case Study 3 -->
+      <article class="case-study" data-modal="modal3">
+        <h3>Community-Driven Growth & Activation</h3>
+        <p>
+          Built and scaled community platforms that doubled as growth and activation surfaces, using real usage data and feedback to inform product prioritisation and onboarding improvements.
+        </p>
+
+           <div class="case-media">
+      <!--  <div class="case-media-placeholder">
+    Canal &amp; River Trust product / membership UI placeholder
+  </div>-->
+<img
+    src="/Users/mattthurtell/Documents/pd/songtree.jpg"
+    alt="Canal & River Trust membership UI"
+    class="case-media-img"
+  />
+  </div>
+<div class="case-points">
+  <div class="case-point">
+   Grew Songtree from <strong>0 → 250K users</strong> with <strong>1M+ songs posted</strong>.
+  </div>
+  <div class="case-point">
+    Scaled YouTube community from <strong>2.5K → 55K+</strong> subscribers.
+  </div>
+  <div class="case-point">
+Used community feedback and hands-on testing to identify common friction points and improve activation and long-term engagement
+  </div>
+</div>
+       <!-- <div class="pill-row">
+          <span class="tech-pill">Community-Led Growth</span>
+          <span class="tech-pill">Onboarding UX</span>
+          <span class="tech-pill">Activation</span>
+          <span class="tech-pill">Product Testing</span>
+        </div>-->
+      </article>
+    </div>
+  </section>
+
+ <!-- Career Highlights -->
+<section class="highlights">
+  <h2>Career highlights</h2>
+
+  <div class="highlight highlight--award" style="margin-bottom: 9px; color: #cbd5e1; font-size: 0.95rem; line-height: 1.55;">
+    <strong>🏆 Microsoft Store Awards 2025:</strong>  
+    Product lead for n-Track Studio, winner of the Creativity category.
+  </div>
+
+  <ul>
+    <li>📈 Led product strategy that doubled revenue in 18 months through onboarding, monetisation, and subscription redesign.</li>
+    <li>📊 Ran data-driven experiments across onboarding, trials, and pricing, delivering triple-digit gains in activation and conversion.</li>
+    <li>🚀 Tripled product income at Canal &amp; River Trust by redefining the membership model and launching a new digital product.</li>
+    <li>👥 Built and leveraged creator communities (250K+ users, 55K+ subscribers) as feedback loops to reduce support load and improve retention.</li>
+  </ul>
+</section>
+
+ <!-- <a href="career-designer.html" class="secondary-btn">View my career &amp; what I do →</a>-->
+
+  <!-- Footer -->
+  <footer class="footer">
+   <!-- <div>Open to Senior Product Designer / Product Lead roles (remote or UK/EU-based).</div>-->
+    <div class="footer-links">
+      <!--<a href="YOUR_CV_LINK.pdf" target="_blank" rel="noopener">Download CV</a>-->
+      <a href="mailto:matt.thurtell@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/matt-thurtell" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+</div>
+
+<!-- Modals (3) with your existing copy, new styling above -->
+<!-- <div class="modal" id="modal1">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <h3>AI-Powered Music Creation Suite &amp; Onboarding</h3>
+<div class="case-visual case-visual--suite">
+  <div class="case-visual-top">
+    <div class="case-visual-brand">
+      <span class="case-visual-dot"></span>
+      <span class="case-visual-label">n-Track Studio · Suite Edition</span>
+    </div>
+    <span class="case-visual-metric">+100% revenue · 18 months</span>
+  </div>
+
+  <div class="case-visual-main">
+    <div class="case-visual-thumbnail case-visual-thumbnail--suite">
+      <div class="play-badge">
+        <span class="play-icon">▶</span>
+      </div>
     </div>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Product Designer</h1>
-            <p>Crafting Digital Experiences That Matter</p>
-            <p class="tagline">Five years of transforming complex problems into elegant solutions</p>
-        </div>
-    </header>
+    <div class="case-visual-side">
+      <div class="case-visual-side-metric">
+        <span class="case-visual-side-label">Trial → Paid</span>
+        <span class="case-visual-side-value">2×+</span>
+      </div>
+      <div class="case-visual-bar"></div>
+      <div class="case-visual-bar"></div>
+      <div class="case-visual-bar case-visual-bar--short"></div>
+      <div class="case-visual-comment">
+        New Suite Edition annual plan + redesigned onboarding across mobile &amp; desktop.
+      </div>
+    </div>
+  </div>
 
-    <main class="portfolio-grid">
-        <div class="case-study" data-modal="modal1">
-            <h3>E-commerce Platform Redesign</h3>
-            <p>Complete overhaul of a B2B marketplace, improving user engagement by 340% and reducing checkout abandonment by 60%.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">User Research</span>
-                <span class="tech-tag">Prototyping</span>
-                <span class="tech-tag">A/B Testing</span>
-            </div>
-        </div>
+  <div class="case-visual-caption">
+    Before/after onboarding, paywall, and Suite Edition annual subscription — aligned to real usage and monetisation patterns.
+  </div>
+</div>
+   <p class="modal-description">
+      <strong>Problem:</strong> n-Track Studio is a music creation app with 20M+ downloads, but onboarding and monetisation weren’t
+      fully aligned with how different types of users — from casual creators to power users — wanted to work. Trial-to-paid conversion
+      was underperforming relative to usage and feature depth.<br><br>
+      <strong>Role:</strong> Head of Product &amp; Growth / Senior Product Designer leading end-to-end UX, subscription design,
+      onboarding, and AI feature integration. Acted as an in-house power user and lead tester for key flows.<br><br>
+      <strong>Process:</strong> Audited existing onboarding and paywalls, analysed usage and monetisation data across desktop and
+      mobile, and identified opportunities for clearer value communication and better sequencing of features. Defined and designed a
+      new high-value annual “Suite Edition” plan bundling all instruments, sound packs, and AI features. Ran iterative experiments
+      on copy, visuals, trial length, and notification prompts across platforms. Dogfooded the product daily, stress-testing critical
+      paths and edge cases before and after release.<br><br>
+      <strong>Impact:</strong> Grew gross monthly revenue by 100% in 18 months, more than doubled trial-to-paid conversion, and saw
+      triple-digit growth in key activation metrics within the first three months of rollout. Product quality and UX issues were
+      caught earlier, contributing to higher satisfaction and fewer support tickets in key areas.<br><br>
+      <strong>Strategic contributions:</strong> Helped position n-Track as an accessible yet powerful AI-driven music suite, using
+      data, design, and power-user insight to shape onboarding, pricing, and feature packaging.<br><br>
+      <strong>Supplemental evidence:</strong> Before/after flows, experiment results, funnel charts, and paywall variants.
+    </p>
+  </div>
+</div>-->
 
-        <div class="case-study" data-modal="modal2">
-            <h3>Healthcare Mobile App</h3>
-            <p>Patient-centered design for a telemedicine platform serving 50K+ users, streamlining appointment booking and medical consultations.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Mobile Design</span>
-                <span class="tech-tag">Accessibility</span>
-                <span class="tech-tag">Design System</span>
-            </div>
-        </div>
+<!-- Intro video modal -->
+<div class="modal" id="modal-intro">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/ZDWevID1ZXU"
+        title="Intro video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>
 
-        <div class="case-study" data-modal="modal3">
-            <h3>SaaS Dashboard Evolution</h3>
-            <p>Transformed complex analytics into intuitive insights, increasing daily active users by 200% and customer satisfaction scores by 45%.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Data Visualization</span>
-                <span class="tech-tag">UX Strategy</span>
-                <span class="tech-tag">Enterprise UX</span>
-            </div>
-        </div>
+<!-- AI Suite video modal -->
+<div class="modal" id="modal-suite">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <div class="case-study-award-note" aria-hidden="false" style="margin-top:5px;">
+  <div class="" role="status" aria-label="Winner — Microsoft Store Awards 2025">
+    Winner - Microsoft Store Awards 2025
+  </div>
 
-        <div class="case-study" data-modal="modal4">
-            <h3>FinTech Innovation Project</h3>
-            <p>Ground-up design of a cryptocurrency trading platform, balancing complex functionality with regulatory compliance and user trust.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Financial UX</span>
-                <span class="tech-tag">Compliance Design</span>
-                <span class="tech-tag">User Testing</span>
-            </div>
-        </div>
+<p style="margin-bottom:15px; color:#cbd5e1; line-height:1.55; font-size:0.95rem;">
+  As Senior Product Manager, I led the strategy, experimentation, and cross-functional delivery behind a full transformation of n-Track’s onboarding and monetisation model - focused on improving activation, clarifying value early, and creating a scalable upgrade path for power users across desktop and mobile.
+</p>
+  <p style="margin-top:10px; margin-bottom:15px; color: #cbd5e1; line-height:1.5; font-size:0.95rem;">
+  This work contributed directly to n-Track Studio winning the <strong>Creativity category</strong> at the Microsoft Store Awards 2025, recognising the commercial and experiential impact of the redesigned onboarding and the launch of a new high-value annual subscription.
+</p>
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/DmzKgoug5a4"
+        title="AI-Powered Music Suite & Onboarding"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+</div>
+  </div>
+</div>
 
-        <div class="case-study" data-modal="modal6">
-            <h3>Enterprise Design System</h3>
-            <p>Built a comprehensive design system from scratch for a Fortune 500 company, reducing design-to-development time by 70% across 15+ product teams.</p>
-            <div class="tech-stack">
-                <span class="tech-tag">Design Systems</span>
-                <span class="tech-tag">Component Library</span>
-                <span class="tech-tag">Design Tokens</span>
-            </div>
-        </div>
-    </main>
+<div class="modal" id="modal2">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <h3>Membership Repositioning &amp; New Digital Products (Canal &amp; River Trust)</h3>
+<div class="case-visual case-visual--membership">
+  <div class="case-visual-top">
+    <div class="case-visual-brand">
+      <span class="case-visual-dot"></span>
+      <span class="case-visual-label">Canal &amp; River Trust · Membership</span>
+    </div>
+    <span class="case-visual-metric">3× product income</span>
+  </div>
 
-    <!-- Modals -->
-    <div class="modal" id="modal1">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="video-placeholder">
-                <span>Add your case study video here</span>
-            </div>
-            <h3>E-commerce Platform Redesign</h3>
-            <p class="modal-description">
-                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
-            </p>
-            <a href="#" class="modal-link">
-                View Full Case Study →
-            </a>
-        </div>
+  <div class="case-visual-main">
+    <div class="case-visual-thumbnail case-visual-thumbnail--membership">
+      <!-- Could be landing page + app/account UI collage -->
     </div>
 
-    <div class="modal" id="modal2">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="image-gallery">
-                <div class="gallery-container" id="gallery-container">
-                    <div class="gallery-slide">
-                        <div class="gallery-placeholder">
-                            Add your first XD export image here<br>
-                            <small style="margin-top: 10px; opacity: 0.7;">Replace this placeholder with your design board</small>
-                        </div>
-                    </div>
-                    <div class="gallery-slide">
-                        <div class="gallery-placeholder">
-                            Add your second XD export image here<br>
-                            <small style="margin-top: 10px; opacity: 0.7;">User flow or wireframes</small>
-                        </div>
-                    </div>
-                    <div class="gallery-slide">
-                        <div class="gallery-placeholder">
-                            Add your third XD export image here<br>
-                            <small style="margin-top: 10px; opacity: 0.7;">Final designs or prototypes</small>
-                        </div>
-                    </div>
-                    <div class="gallery-slide">
-                        <div class="gallery-placeholder">
-                            Add your fourth XD export image here<br>
-                            <small style="margin-top: 10px; opacity: 0.7;">User testing or results</small>
-                        </div>
-                    </div>
-                </div>
-                <button class="gallery-nav prev" onclick="changeSlide(-1)">‹</button>
-                <button class="gallery-nav next" onclick="changeSlide(1)">›</button>
-                <div class="gallery-dots">
-                    <div class="gallery-dot active" onclick="currentSlide(1)"></div>
-                    <div class="gallery-dot" onclick="currentSlide(2)"></div>
-                    <div class="gallery-dot" onclick="currentSlide(3)"></div>
-                    <div class="gallery-dot" onclick="currentSlide(4)"></div>
-                </div>
-            </div>
-            <h3>Healthcare Mobile App</h3>
-            <p class="modal-description">
-                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
-            </p>
-            <a href="#" class="modal-link">
-                View Full Case Study →
-            </a>
-        </div>
+    <div class="case-visual-side">
+      <div class="case-visual-side-metric">
+        <span class="case-visual-side-label">Journey</span>
+        <span class="case-visual-side-value">Awareness → Join → Renew</span>
+      </div>
+      <div class="case-visual-bar"></div>
+      <div class="case-visual-bar case-visual-bar--short"></div>
+      <div class="case-visual-comment">
+        Repositioned the membership proposition, retention strategy, and digital product portfolio based on behavioural insight and end-to-end journey analysis.
+      </div>
     </div>
+  </div>
 
-    <div class="modal" id="modal3">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="video-placeholder">
-                <span>Add your case study video here</span>
-            </div>
-            <h3>SaaS Dashboard Evolution</h3>
-            <p class="modal-description">
-                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
-            </p>
-            <a href="#" class="modal-link">
-                View Full Case Study →
-            </a>
+  <div class="case-visual-caption">
+Membership proposition and digital join/renew journeys rebuilt to align supporter motivation, long-term value, and retention drivers.
+  </div>
+</div>   <p class="modal-description">
+  <strong>Problem:</strong> Membership growth had plateaued, and the existing proposition was underperforming with digital-first audiences. 
+  The end-to-end journey from awareness to joining to renewal lacked clarity, resulting in weak conversion and limited long-term engagement.<br><br>
+
+  <strong>Role:</strong> Product Manager for membership and fundraising, accountable for discovery, proposition strategy, 
+  and delivery across digital membership and new product initiatives.<br><br>
+
+  <strong>Approach:</strong>
+  Led a full discovery phase combining supporter and lapsed-member interviews, behavioural and transactional analysis, and end-to-end journey mapping. 
+  This surfaced that the existing two-tier membership structure was confusing and diluting value perception. I made the call to retire the underperforming 
+  wildlife tier and consolidate the offer into a single, clearer membership proposition - <em>Become a Friend</em> - centred on wellbeing and the idea that 
+  “Life’s better by water.”<br><br>
+
+  In parallel, I identified an opportunity to diversify income beyond traditional membership by productising an existing offline behaviour. 
+  I led the launch of <em>Love My Stretch</em>, a new digital product allowing supporters to dedicate and relicense a virtual space tied to a local waterway — 
+  modernising and scaling a previously manual, physical-only offering. I worked closely with fundraising, marketing, and engineering to prioritise delivery 
+  and sequence the roadmap against revenue and retention impact.<br>
+
+  <button class="love-video-btn" data-modal-target="loveMyStretchModal">
+    ▶ Watch Love My Stretch overview
+  </button>
+  <br><br>
+
+  <strong>Impact:</strong> Tripled product income in approximately 18 months, improved conversion through simplified and more compelling digital journeys, 
+  and increased retention by introducing regular, localised engagement tied to members’ chosen waterways.<br><br>
+
+  <strong>Strategic contribution:</strong> Shifted the organisation toward a more product-led approach to supporter engagement, with clearer ownership of 
+  outcomes, stronger alignment between teams, and a scalable foundation for future digital revenue.
+</p>
+  </div>
+</div>
+
+<div class="modal" id="modal3">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <h3>Community-Led Product Growth - Songtree & YouTube</h3>
+
+    <div class="case-visual case-visual--community">
+      <div class="case-visual-top">
+        <div class="case-visual-brand">
+          <span class="case-visual-dot"></span>
+          <span class="case-visual-label">Songtree · n-Track Studio</span>
         </div>
+        <span class="case-visual-metric">25K users · 1M+ songs ·   55K+ subscribers</span>
+      </div>
+
+    <div class="case-visual-main">
+  <!-- LEFT: clickable thumbnail -->
+  <button
+    class="case-visual-thumbnail case-visual-thumbnail--community video-thumb"
+    type="button"
+    data-modal-target="modal-songtree-video"
+  >
+  <div class="video-play-pill"></div>
+   <!-- <div class="play-badge">
+      <span class="play-icon">▶</span>
+    </div>-->
+  </button>
+
+  <!-- RIGHT: bars + quote -->
+  <div class="case-visual-side">
+    <div class="case-visual-bar"></div>
+    <div class="case-visual-bar"></div>
+    <div class="case-visual-bar case-visual-bar--short"></div>
+    <div class="case-visual-comment">
+      “This finally helped me understand how the full workflow fits together.”
     </div>
+  </div>
+</div>
 
-    <div class="modal" id="modal4">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="video-placeholder">
-                <span>Add your case study video here</span>
-            </div>
-            <h3>FinTech Innovation Project</h3>
-            <p class="modal-description">
-                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
-            </p>
-            <a href="#" class="modal-link">
-                View Full Case Study →
-            </a>
-        </div>
+<div class="case-visual-caption">
+  Songtree’s <strong>250K users</strong> and <strong>1M+ songs</strong>, alongside a <strong>55K+</strong> creator audience on YouTube, became a continuous feedback and validation loop - accelerating activation, reducing support friction, and improving long-term engagement inside n-Track Studio.
+</div>
+ </div>
+
+   <p class="modal-description">
+  <strong>Context:</strong> Songtree is a collaborative music platform built within the n-Track ecosystem, enabling musicians to record, share, 
+  and build songs together. I helped scale it from an early concept into a community of over <strong>250K users</strong> with 
+  <strong>1M+ songs</strong>, positioning it as both a standalone product and a strategic growth surface for n-Track Studio.<br><br>
+
+  <strong>Problem:</strong> As Songtree increasingly acted as an entry point into n-Track Studio, we saw that many of n-Track’s most valuable 
+  features were under-discovered. New users often dropped off before reaching key “aha” moments - particularly around recording workflows, 
+  advanced mixing, and collaboration - limiting activation, retention, and downstream monetisation.<br><br>
+
+  <strong>Role:</strong> Senior Product Manager across community-led growth and activation. I owned discovery, prioritisation, 
+  and execution across product, education, and community touchpoints, acting as an internal power user to validate real-world workflows 
+  and friction points.<br><br>
+
+  <strong>Approach:</strong> I scaled and leveraged a YouTube community from <strong>2.5K → 55K+ subscribers</strong>, using real use cases, 
+  end-to-end workflows, and problem-led tutorials to surface how creators actually used the product. Comments, questions, and behavioural 
+  patterns from both Songtree and YouTube became structured input into product discovery - informing UX improvements, in-product education, 
+  documentation updates, and prioritisation of activation-related work.<br><br>
+
+  <strong>Impact:</strong> This reduced support tickets by approximately <strong>30%</strong> and increased post-onboarding conversion by 
+  around <strong>35%</strong>, as more users successfully reached high-value workflows and stuck with the product. Feature adoption increased, 
+  particularly for advanced capabilities, contributing to growth in non-onboarding premium subscriptions.<br><br>
+
+  <strong>Strategic contribution:</strong> Repositioned community from a marketing channel into a core product surface - used to validate ideas, 
+  prioritise UX investment, and guide discovery inside the app. This created a tighter feedback loop between content, community, and product, 
+  improving activation efficiency and long-term customer value.
+</p>
+</div>
+</div>
+
+<!-- Love My Stretch Video Modal -->
+<div class="modal" id="loveMyStretchModal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <div class="video-container-embed">
+      <!-- Replace the src with your real Love My Stretch YouTube embed URL -->
+      <iframe
+        src="https://www.youtube.com/embed/5yNbMCQWPS4?si=EEkVoUAFwVbzhNoK"
+        title="Love My Stretch overview"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
     </div>
+  </div>
+</div>
 
-    <div class="modal" id="modal5">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="video-placeholder">
-                <span>Add your case study video here</span>
-            </div>
-            <h3>AI-Powered Content Platform</h3>
-            <p class="modal-description">
-                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
-            </p>
-            <a href="#" class="modal-link">
-                View Full Case Study →
-            </a>
-        </div>
+<!-- Songtree / YouTube video modal -->
+<div class="modal" id="modal-songtree-video">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <div class="video-container-embed">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/i53O2VU9qb4?si=fzPjvYP87EsU5Sut"
+        title="Songtree & YouTube community overview"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
     </div>
+  </div>
+</div>
 
-    <div class="modal" id="modal6">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="video-placeholder">
-                <span>Add your case study video here</span>
-            </div>
-            <h3>Enterprise Design System</h3>
-            <p class="modal-description">
-                Add your detailed case study description here. Explain your design process, challenges faced, solutions implemented, and the impact on business metrics. Include user research insights, design iterations, and final outcomes.
-            </p>
-            <a href="#" class="modal-link">
-                View Full Case Study →
-            </a>
-        </div>
-    </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const caseStudies = document.querySelectorAll('.case-study');
+  const modals = document.querySelectorAll('.modal');
+  const closeButtons = document.querySelectorAll('.modal-close');
 
-    <script>
-        // Password protection
-        function checkPassword() {
-            const input = document.getElementById('passwordInput');
-            const overlay = document.getElementById('passwordOverlay');
-            const error = document.getElementById('passwordError');
-            const body = document.body;
+  // Open modal when clicking any .case-study (incl. intro + AI suite)
+  caseStudies.forEach(study => {
+    study.addEventListener('click', () => {
+      const modalId = study.getAttribute('data-modal');
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+// Buttons inside a modal that open another modal (Love My Stretch)
+const innerModalButtons = document.querySelectorAll('[data-modal-target]');
 
-            if (input.value === 'Product1!') {
-                overlay.classList.add('hidden');
-                body.classList.remove('locked');
-                sessionStorage.setItem('portfolioUnlocked', 'true');
-            } else {
-                error.classList.add('show');
-                input.value = '';
-                input.focus();
-                setTimeout(() => {
-                    error.classList.remove('show');
-                }, 3000);
-            }
-        }
+innerModalButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const targetId = btn.getAttribute('data-modal-target');
+    const targetModal = document.getElementById(targetId);
+    if (targetModal) {
+      targetModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+});
+  // Close when clicking the X
+  closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      button.closest('.modal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+  });
 
-        // Allow Enter key to submit
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
+  // Close when clicking outside the modal content
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
 
-        // Check if already unlocked in this session
-        window.addEventListener('DOMContentLoaded', function() {
-            if (sessionStorage.getItem('portfolioUnlocked') === 'true') {
-                document.getElementById('passwordOverlay').classList.add('hidden');
-                document.body.classList.remove('locked');
-            }
-        });
-
-        // Gallery functionality
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('.gallery-slide');
-        const dots = document.querySelectorAll('.gallery-dot');
-        const container = document.getElementById('gallery-container');
-
-        function changeSlide(direction) {
-            currentSlideIndex += direction;
-            if (currentSlideIndex >= slides.length) {
-                currentSlideIndex = 0;
-            }
-            if (currentSlideIndex < 0) {
-                currentSlideIndex = slides.length - 1;
-            }
-            updateGallery();
-        }
-
-        function currentSlide(index) {
-            currentSlideIndex = index - 1;
-            updateGallery();
-        }
-
-        function updateGallery() {
-            if (container) {
-                container.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
-            }
-            
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlideIndex);
-            });
-        }
-
-        // Modal functionality
-        const caseStudies = document.querySelectorAll('.case-study');
-        const modals = document.querySelectorAll('.modal');
-        const closeButtons = document.querySelectorAll('.modal-close');
-
-        caseStudies.forEach(study => {
-            study.addEventListener('click', () => {
-                const modalId = study.getAttribute('data-modal');
-                const modal = document.getElementById(modalId);
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        closeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                button.closest('.modal').classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-        });
-
-        modals.forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        });
-
-        // Escape key to close modals
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                modals.forEach(modal => {
-                    modal.classList.remove('active');
-                });
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Add smooth scroll behavior
-        document.documentElement.style.scrollBehavior = 'smooth';
-    </script>
+  // Close all modals on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modals.forEach(modal => modal.classList.remove('active'));
+      document.body.style.overflow = 'auto';
+    }
+  });
+});
+</script>
 </body>
 </html>
