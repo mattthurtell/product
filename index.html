@@ -1419,6 +1419,7 @@ Used community feedback and hands-on testing to identify common friction points 
     <div class="video-container">
       <iframe
         src="https://www.youtube-nocookie.com/embed/CqPGYMn0qw4?modestbranding=1&rel=0&cc_load_policy=1"
+        data-src="https://www.youtube-nocookie.com/embed/CqPGYMn0qw4"
         title="Intro video"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -1446,6 +1447,7 @@ Used community feedback and hands-on testing to identify common friction points 
     <div class="video-container">
       <iframe
         src="https://www.youtube-nocookie.com/embed/hyTvIxp-Bss?modestbranding=1&rel=0&cc_load_policy=1"
+        data-src="https://www.youtube-nocookie.com/embed/hyTvIxp-Bss"
         title="AI-Powered Music Suite & Onboarding"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -1601,6 +1603,7 @@ Membership proposition and digital join/renew journeys rebuilt to align supporte
      <div class="video-container">
       <iframe
         src="https://www.youtube-nocookie.com/embed/5yNbMCQWPS4?modestbranding=1&rel=0&cc_load_policy=1"
+        data-src="https://www.youtube-nocookie.com/embed/5yNbMCQWPS4"
         title="AI-Powered Music Suite & Onboarding"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -1617,6 +1620,7 @@ Membership proposition and digital join/renew journeys rebuilt to align supporte
     <div class="video-container-embed">
       <iframe
         src="https://www.youtube-nocookie.com/embed/i53O2VU9qb4?si=fzPjvYP87EsU5Sut?modestbranding=1&rel=0&cc_load_policy=1"
+        data-src="https://www.youtube-nocookie.com/embed/fzPjvYP87EsU5Sut"
         title="Songtree & YouTube community overview"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -1634,13 +1638,31 @@ document.addEventListener('DOMContentLoaded', function () {
   const innerModalButtons = document.querySelectorAll('[data-modal-target]');
 
   function stopVideos(modal) {
-    const iframes = modal.querySelectorAll('iframe');
-    iframes.forEach(iframe => {
-      const src = iframe.src;
-      iframe.src = '';
-      iframe.src = src;
+  	  if (!modal.classList.contains('active')) return;
+  const iframes = modal.querySelectorAll('iframe');
+
+  iframes.forEach(iframe => {
+    const originalSrc = iframe.getAttribute('data-src');
+
+    // Remove iframe entirely to fully reset player state (mobile-safe)
+    const parent = iframe.parentNode;
+    parent.removeChild(iframe);
+
+    // Recreate iframe node
+    const newIframe = document.createElement('iframe');
+    newIframe.setAttribute('src', originalSrc);
+    newIframe.setAttribute('data-src', originalSrc);
+
+    // Copy essential attributes
+    Array.from(iframe.attributes).forEach(attr => {
+      if (attr.name !== 'src' && attr.name !== 'data-src') {
+        newIframe.setAttribute(attr.name, attr.value);
+      }
     });
-  }
+
+    parent.appendChild(newIframe);
+  });
+}
 
   // Open modal when clicking any .case-study
   caseStudies.forEach(study => {
