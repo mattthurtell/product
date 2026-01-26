@@ -1645,23 +1645,24 @@ document.addEventListener('DOMContentLoaded', function () {
   const closeButtons = document.querySelectorAll('.modal-close');
   const innerModalButtons = document.querySelectorAll('[data-modal-target]');
 
-  function stopVideos(modal) {
-  	  if (!modal.classList.contains('active')) return;
+ function stopVideos(modal) {
   const iframes = modal.querySelectorAll('iframe');
 
   iframes.forEach(iframe => {
-    const originalSrc = iframe.getAttribute('data-src');
-
-    // Remove iframe entirely to fully reset player state (mobile-safe)
+    const originalSrc = iframe.dataset.src || iframe.src;
     const parent = iframe.parentNode;
+
+    // 1) Hard-stop playback immediately
+    iframe.src = 'about:blank';
+
+    // 2) Remove iframe node
     parent.removeChild(iframe);
 
-    // Recreate iframe node
+    // 3) Recreate iframe cleanly
     const newIframe = document.createElement('iframe');
-    newIframe.setAttribute('src', originalSrc);
-    newIframe.setAttribute('data-src', originalSrc);
+    newIframe.src = originalSrc;
+    newIframe.dataset.src = originalSrc;
 
-    // Copy essential attributes
     Array.from(iframe.attributes).forEach(attr => {
       if (attr.name !== 'src' && attr.name !== 'data-src') {
         newIframe.setAttribute(attr.name, attr.value);
